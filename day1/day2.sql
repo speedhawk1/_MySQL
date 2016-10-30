@@ -84,7 +84,7 @@ FROM demo.student_course;
 INSERT INTO demo.student_course VALUES (NULL, 1, 2, NULL);
 INSERT INTO demo.student_course VALUES (NULL, 2, 2, NULL);
 # INSERT INTO demo.student_course VALUES (NULL, 3, NULL, NULL);
-INSERT INTO demo.student_course VALUES (NULL, NULL, 1, NULL);
+INSERT INTO demo.student_course VALUES (NULL, NULL, 4, NULL);
 
 # DROP TABLE demo.student_course;
 # DROP TABLE demo.student;
@@ -108,3 +108,28 @@ SELECT
 FROM demo.student s JOIN demo.course c
   JOIN demo.student_course sc
     ON s.id = sc.studentId AND c.id = sc.courseId;
+
+ALTER TABLE demo.course RENAME demo.new_course;
+
+SHOW TABLES FROM demo;
+
+
+ALTER TABLE demo.new_student
+ADD COLUMN test CHAR (1) AFTER id;
+
+DESC demo.new_student;
+
+SELECT *
+FROM demo.new_student;
+
+ALTER TABLE demo.new_student
+    MODIFY COLUMN test INT AFTER gender;
+
+ALTER TABLE demo.new_student
+    CHANGE test new_test CHAR(10);
+
+ALTER TABLE demo.student_course
+    DROP FOREIGN KEY student_course_studentId;
+
+SELECT *
+FROM demo.new_course;
