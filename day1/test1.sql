@@ -3,13 +3,17 @@
 DROP DATABASE IF EXISTS test;
 CREATE DATABASE test;
 
+show CREATE DATABASE test;
+
 # SHOW TABLES FROM test;
 
 DROP TABLE IF EXISTS test.student;
 CREATE TABLE test.student (
-  sno   VARCHAR(10),
-  sname VARCHAR(20),
-  age   INT(3)
+  sno   CHAR(10), -- 001
+  sname VARCHAR(255), -- zhangsan
+  age   INT(3),
+  height DOUBLE(3, 2),
+  dob DATE
 );
 
 -- SQL select *****
@@ -19,12 +23,15 @@ SELECT *
 FROM test.student;
 
 -- create
-INSERT INTO test.student VALUES ('001', 'zhangsan', 18);
-INSERT INTO test.student VALUES ('002', 'lisi', 20);
-INSERT INTO test.student VALUES ('003', '中文', 20);
+INSERT INTO test.student VALUES ('001', 'zhangsan', 18, 1.72, '1990-1-2');
+# INSERT INTO test.student VALUES ('002', 'lisi', 20);
+# INSERT INTO test.student VALUES ('003', '中文', 20);
 
 # SHOW VARIABLES LIKE 'char%';
 # SHOW VARIABLES LIKE 'coll%';
+
+TRUNCATE TABLE test.student;
+DELETE FROM test.student;
 
 -- update
 UPDATE test.student
@@ -35,6 +42,10 @@ WHERE sname = 'lisi';
 DELETE FROM test.student
 WHERE sno = '002';
 
+-- 授权 GRANT ;
+-- 撤消权限 REVOKE ;
+
+-- DBA
 
 # SHOW CREATE DATABASE test;
 
