@@ -14,7 +14,7 @@ CREATE TABLE demo.student (
 
 SHOW FULL COLUMNS FROM demo.student;
 
-ALTER TABLE demo.student AUTO_INCREMENT = 10000;
+# ALTER TABLE demo.student AUTO_INCREMENT = 10000;
 
 DESC demo.student; -- desc describe 描述
 
@@ -30,6 +30,21 @@ UPDATE demo.student
 SET height = 1.82
 WHERE sno = '001';
 
+# SHOW FULL COLUMNS FROM demo.course;
+
+
+
+DROP TABLE IF EXISTS demo.student_course;
+CREATE TABLE demo.student_course (
+  id        INT AUTO_INCREMENT PRIMARY KEY,
+  studentId INT COMMENT 'student id',
+  courseId  INT COMMENT 'course id',
+  grade     INT(3) COMMENT 'test grade'
+  #   FOREIGN KEY (studentId) REFERENCES demo.student(id),
+  #   FOREIGN KEY (courseId) REFERENCES demo.course(id)
+)
+  COMMENT '学生课程表';
+
 DROP TABLE IF EXISTS demo.course;
 CREATE TABLE demo.course (
   id    INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,8 +53,6 @@ CREATE TABLE demo.course (
 )
   COMMENT '课程表';
 
-SHOW FULL COLUMNS FROM demo.course;
-
 INSERT INTO demo.course VALUES (NULL, 'HTML', 1);
 INSERT INTO demo.course VALUES (NULL, 'CSS', 2);
 INSERT INTO demo.course VALUES (NULL, 'Java SE', 3);
@@ -47,24 +60,17 @@ INSERT INTO demo.course VALUES (NULL, 'Java SE', 3);
 SELECT *
 FROM demo.course;
 
-DROP TABLE IF EXISTS demo.student_course;
-CREATE TABLE demo.student_course (
-  id        INT AUTO_INCREMENT PRIMARY KEY,
-  studentId INT COMMENT 'student id',
-  courseId  INT COMMENT 'course id',
-  grade     INT(3) COMMENT 'test grade'
-)
-  COMMENT '学生课程表';
-
 ALTER TABLE demo.student_course
 ADD CONSTRAINT student_course_studentId
 FOREIGN KEY (studentId)
-REFERENCES demo.student (id);
+REFERENCES demo.student (id)
+  ON DELETE CASCADE; -- CSS Cascading Style Sheet
 
 ALTER TABLE demo.student_course
 ADD CONSTRAINT student_course_courseId
 FOREIGN KEY (courseId)
-REFERENCES demo.course (id);
+REFERENCES demo.course (id)
+  ON DELETE SET NULL;
 
 SELECT *
 FROM demo.student;
@@ -77,5 +83,28 @@ FROM demo.student_course;
 
 INSERT INTO demo.student_course VALUES (NULL, 1, 2, NULL);
 INSERT INTO demo.student_course VALUES (NULL, 2, 2, NULL);
-INSERT INTO demo.student_course VALUES (NULL, 3, NULL, NULL);
+# INSERT INTO demo.student_course VALUES (NULL, 3, NULL, NULL);
 INSERT INTO demo.student_course VALUES (NULL, NULL, 1, NULL);
+
+# DROP TABLE demo.student_course;
+# DROP TABLE demo.student;
+# DROP TABLE demo.course;
+
+-- create tables
+-- alter FK
+
+# DELETE FROM demo.student
+# WHERE id = 1;
+#
+# DELETE FROM demo.course
+# WHERE id = 2;
+#
+# DELETE FROM demo.student_course
+# WHERE id = 3;
+
+SELECT
+  s.name,
+  c.title
+FROM demo.student s JOIN demo.course c
+  JOIN demo.student_course sc
+    ON s.id = sc.studentId AND c.id = sc.courseId;
