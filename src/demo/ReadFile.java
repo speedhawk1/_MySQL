@@ -10,10 +10,13 @@ import java.io.IOException;
  */
 public class ReadFile {
     public static void main(String[] args) throws IOException {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("data/ip.txt"))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("data/ip.txt"))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                String start = line.split("\\s+")[0];
+                String end = line.split("\\s+")[1];
+                String location = line.replace(start, "").replace(end, "").trim();
+                System.out.println(start + "-" + end + "-" + location);
             }
         }
     }

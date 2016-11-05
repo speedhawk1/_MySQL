@@ -180,3 +180,58 @@ SELECT
   DNAME
 FROM scott.emp
   INNER JOIN scott.dept; -- 13 * 4 = 52
+
+CREATE TABLE scott.emp_backup
+  SELECT *
+  FROM scott.emp;
+
+DESC scott.emp_backup;
+
+SELECT *
+FROM scott.emp_backup;
+
+TRUNCATE TABLE scott.emp_backup;
+
+INSERT INTO scott.emp_backup
+  SELECT *
+  FROM scott.emp
+  WHERE JOB = 'manager';
+
+CREATE OR REPLACE VIEW v_emp
+AS
+  SELECT
+    ENAME,
+    JOB,
+    MGR
+  FROM scott.emp
+  WHERE DEPTNO IN (20, 30);
+
+SELECT *
+FROM scott.emp_backup;
+
+SELECT *
+FROM scott.v_emp;
+
+UPDATE scott.emp
+SET job = '修改了的工作'
+WHERE EMPNO = 7566;
+
+SELECT *
+FROM scott.emp;
+
+SELECT *
+FROM scott.emp_backup;
+
+SELECT *
+FROM scott.v_emp;
+
+SHOW CREATE VIEW scott.v_emp;
+
+DROP VIEW scott.v_emp;
+
+UPDATE v_emp
+SET ENAME = 'tester'
+WHERE ENAME = 'scott';
+
+SELECT *
+FROM scott.emp;

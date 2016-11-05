@@ -8,3 +8,6 @@ CREATE TABLE db_ip.ip (
   end      VARCHAR(15),
   location VARCHAR(255)
 );
+
+SELECT count(*)
+FROM db_ip.ip;
