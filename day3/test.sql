@@ -36,7 +36,7 @@ WHERE id = 2;
 DELETE FROM demo.new_student
 WHERE id = 2;
 
-SHOW DATABASES ;
+SHOW DATABASES;
 SHOW TABLES FROM demo;
 SHOW TABLE STATUS FROM demo;
 
@@ -61,7 +61,9 @@ FROM scott.dept;
 SELECT *
 FROM scott.salgrade;
 
-SELECT ENAME, SAL
+SELECT
+  ENAME,
+  SAL
 FROM scott.emp
 WHERE ENAME <> 'scott';
 
@@ -82,14 +84,16 @@ WHERE JOB = 'salesman' OR HIREDATE > '1981-5-1';
 
 SELECT *
 FROM scott.emp
-ORDER BY JOB DESC , HIREDATE DESC ; -- ASC ascend 升序 DESC descend 降序
+ORDER BY JOB DESC, HIREDATE DESC; -- ASC ascend 升序 DESC descend 降序
 
 SELECT *
-FROM scott.emp LIMIT 3 OFFSET 6;
+FROM scott.emp
+LIMIT 3 OFFSET 6;
 
 
 SELECT *
-FROM scott.emp LIMIT 6, 3;
+FROM scott.emp
+LIMIT 6, 3;
 
 SELECT *
 FROM scott.emp
@@ -100,3 +104,36 @@ SHOW VARIABLES LIKE 'col%';
 SELECT *
 FROM scott.emp
 WHERE ENAME REGEXP '[b-d]';
+
+SELECT *
+FROM scott.emp
+WHERE JOB NOT IN ('manager', 'clerk');
+# WHERE JOB = 'clerk' OR JOB = 'manager';
+
+SELECT *
+FROM scott.emp
+WHERE SAL NOT BETWEEN 2000 AND 3000;
+# sal >= 2000 and sal <= 3000;
+
+SELECT
+  ENAME AS '员工姓名',
+  SAL * 12 '年薪'
+FROM scott.emp;
+
+SELECT
+  e.ENAME,
+  e.SAL
+FROM scott.emp AS e;
+
+SELECT *
+FROM emp
+WHERE COMM IS NULL;
+
+UPDATE scott.emp
+SET COMM = NULL
+WHERE ename = 'scott';
+
+SELECT
+  ENAME,
+  SAL + ifnull(COMM, 0)
+FROM scott.emp;
