@@ -35,3 +35,47 @@ WHERE id = 2;
 
 DELETE FROM demo.new_student
 WHERE id = 2;
+
+SHOW DATABASES ;
+SHOW TABLES FROM demo;
+SHOW TABLE STATUS FROM demo;
+
+SHOW COLUMNS FROM demo.new_student; -- DESC
+SHOW FULL COLUMNS FROM demo.new_student;
+
+SHOW VARIABLES LIKE 'ch%';
+SHOW VARIABLES LIKE 'col%';
+
+SHOW CREATE TABLE demo.new_student;
+
+# scott tiger
+
+DESC scott.emp;
+
+SELECT * -- 所有行， 所有列
+FROM scott.emp;
+
+SELECT *
+FROM scott.dept;
+
+SELECT *
+FROM scott.salgrade;
+
+SELECT ENAME, SAL
+FROM scott.emp
+WHERE ENAME <> 'scott';
+
+SELECT *
+FROM scott.emp;
+
+SELECT HIREDATE
+FROM scott.emp
+WHERE HIREDATE > '1985-1-1';
+
+SELECT *
+FROM emp
+WHERE JOB = 'salesman' AND HIREDATE > '1981-5-1';
+
+SELECT *
+FROM emp
+WHERE JOB = 'salesman' OR HIREDATE > '1981-5-1';
