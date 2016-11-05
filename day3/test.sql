@@ -79,3 +79,7 @@ WHERE JOB = 'salesman' AND HIREDATE > '1981-5-1';
 SELECT *
 FROM emp
 WHERE JOB = 'salesman' OR HIREDATE > '1981-5-1';
+
+SELECT *
+FROM scott.emp
+ORDER BY JOB DESC , HIREDATE DESC ; -- ASC ascend 升序 DESC descend 降序
