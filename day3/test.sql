@@ -137,3 +137,46 @@ SELECT
   ENAME,
   SAL + ifnull(COMM, 0)
 FROM scott.emp;
+
+SELECT *
+FROM scott.emp;
+
+SELECT *
+FROM scott.dept;
+
+SELECT
+  ENAME,
+  dname
+FROM scott.emp
+  INNER JOIN scott.dept
+    ON emp.DEPTNO = dept.DEPTNO;
+
+SELECT
+  ENAME,
+  DNAME
+FROM scott.emp
+  LEFT OUTER JOIN scott.dept
+    ON emp.DEPTNO = dept.DEPTNO
+
+UNION
+
+SELECT
+  ENAME,
+  DNAME
+FROM scott.emp
+  RIGHT OUTER JOIN scott.dept
+    ON emp.DEPTNO = dept.DEPTNO;
+
+
+SELECT
+  ENAME,
+  dname
+FROM scott.emp
+  INNER JOIN scott.dept
+  USING (deptno);
+
+SELECT
+  ENAME,
+  DNAME
+FROM scott.emp
+  INNER JOIN scott.dept; -- 13 * 4 = 52
