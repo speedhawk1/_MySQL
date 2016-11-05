@@ -36,10 +36,11 @@ WHERE sno = '001';
 
 DROP TABLE IF EXISTS demo.student_course;
 CREATE TABLE demo.student_course (
-  id        INT AUTO_INCREMENT PRIMARY KEY,
+#   id        INT AUTO_INCREMENT PRIMARY KEY,
   studentId INT COMMENT 'student id',
   courseId  INT COMMENT 'course id',
-  grade     INT(3) COMMENT 'test grade'
+  grade     INT(3) COMMENT 'test grade',
+  PRIMARY KEY (studentId, courseId)
   #   FOREIGN KEY (studentId) REFERENCES demo.student(id),
   #   FOREIGN KEY (courseId) REFERENCES demo.course(id)
 )
