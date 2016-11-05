@@ -83,3 +83,20 @@ WHERE JOB = 'salesman' OR HIREDATE > '1981-5-1';
 SELECT *
 FROM scott.emp
 ORDER BY JOB DESC , HIREDATE DESC ; -- ASC ascend 升序 DESC descend 降序
+
+SELECT *
+FROM scott.emp LIMIT 3 OFFSET 6;
+
+
+SELECT *
+FROM scott.emp LIMIT 6, 3;
+
+SELECT *
+FROM scott.emp
+WHERE ENAME LIKE '_a%';
+
+SHOW VARIABLES LIKE 'col%';
+
+SELECT *
+FROM scott.emp
+WHERE ENAME REGEXP '[b-d]';
