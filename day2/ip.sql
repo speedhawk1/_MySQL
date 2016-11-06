@@ -9,5 +9,11 @@ CREATE TABLE db_ip.ip (
   location VARCHAR(255)
 );
 
-SELECT count(*)
+SELECT *
 FROM db_ip.ip;
+
+-- 166.111.5.207
+
+SELECT *
+FROM db_ip.ip
+WHERE inet_aton('166.111.5.207') BETWEEN inet_aton(start) AND inet_aton(end);

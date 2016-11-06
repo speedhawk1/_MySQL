@@ -25,29 +25,25 @@ public class Test {
         Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/db_ip", "root", "system");
         connection.setAutoCommit(false);
 //        3. 创建 SQL 语句
+        long begin = System.currentTimeMillis();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("data/ip.txt"))) {
             String line;
-            PreparedStatement preparedStatement;
+            String sql = "INSERT INTO db_ip.ip VALUES (NULL , ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             while ((line = bufferedReader.readLine()) != null) {
-                counter++;
+                System.out.println(++counter);
                 String start = line.split("\\s+")[0];
                 String end = line.split("\\s+")[1];
                 String location = line.replace(start, "").replace(end, "").trim();
-                String sql = "INSERT INTO db_ip.ip VALUES (NULL , ?, ?, ?)";
-                preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, start);
                 preparedStatement.setString(2, end);
                 preparedStatement.setString(3, location);
                 preparedStatement.addBatch();
-
-                if (counter % 10000 == 0) {
-                    System.out.println(counter);
-                    preparedStatement.executeBatch();
-                    preparedStatement.clearBatch();
-                }
             }
+            preparedStatement.executeBatch();
             connection.commit();
         }
         connection.close();
+        System.out.println("total time: " + (System.currentTimeMillis() - begin) / 1000 + " seconds.");
     }
 }
