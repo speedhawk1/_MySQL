@@ -1,18 +1,25 @@
 START TRANSACTION;
 
-SELECT *
-FROM scott.emp;
+SAVEPOINT a;
 
 DELETE
 FROM scott.emp
-WHERE EMPNO = 7521; -- DML
+WHERE EMPNO = 7566; -- DML
 
-# TRUNCATE TABLE scott.emp;
+SAVEPOINT b;
+
+DELETE FROM scott.emp;
 
 ROLLBACK; -- 回滚
 
 COMMIT; -- 提交
 
-CREATE TABLE scott.t( -- DDL
-  id INT
-);
+ROLLBACK TO a; -- 不会结束事务
+ROLLBACK TO b;
+
+SELECT *
+FROM scott.emp;
+
+-- ----------------------
+DELETE FROM scott.emp; -- commit;
+ROLLBACK ;
