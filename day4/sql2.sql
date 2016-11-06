@@ -18,3 +18,19 @@ WHERE JOB = (
   FROM scott.emp
   WHERE ENAME = 't_s'
 );
+
+CREATE TABLE scott.test
+  SELECT *
+  FROM scott.emp LIMIT 0;
+
+CREATE TABLE scott.test LIKE scott.emp;
+
+DROP TABLE scott.test;
+
+SELECT *
+FROM scott.test;
+
+DESC scott.test;
+
+DESC scott.emp;
+
