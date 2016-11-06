@@ -60,3 +60,25 @@ HAVING avg(SAL + ifnull(COMM, 0)) > 2000; -- 组检索 ：having  where ： 行�
 
 SELECT *
 FROM scott.emp;
+
+-- date
+SELECT now();
+SELECT curdate();
+SELECT current_time;
+SELECT current_user;
+SELECT date_add(now(), INTERVAL 20 MINUTE);
+
+-- text
+SELECT lcase(ucase('hello'));
+SELECT mid('hello', 1, 3);
+SELECT substr('hello', 1, 3);
+SELECT substring('hello', 1, 3);
+SELECT length('hello');
+
+-- number
+SELECT round(1.4);
+SELECT ceil(1.4);
+SELECT floor(1.9);
+
+
+
